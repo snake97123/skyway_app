@@ -28,7 +28,7 @@
       });
       
       const peer = new Peer({
-        key: 'MY-KEY',
+        key: 'MY-API-KEY'
         debug: 3
       })
       peer.on('open', () => {
@@ -36,7 +36,7 @@
       });
 
       document.getElementById('make-call').onclick = () => {
-        const theirID = document.getElementById('their-id').value:
+        const theirID = document.getElementById('their-id').value;
         const mediaConnection = peer.call(theirID, localStream);
         setEventListener(mediaConnection);
       };
@@ -48,5 +48,10 @@
           videoElm.play();
         });
       }
+
+      peer.on('call', mediaConnection => {
+        mediaConnection.answer(localStream);
+        setEventListener(mediaConnection);
+      });
  </script>
 </html>
